@@ -25,38 +25,10 @@
 	<!-- /container -->
 	<script>
 	$("#btn2").click(function(){
-		var id = $("#id").val();
-		var pwd = $("#pwd").val();
-		var param = {};
-		param["userId"] = id;
-		param["userPwd"] = pwd;
-		param["saveId"] = $("#saveId").prop("checked");
-		param = JSON.stringify(param);
-		var a = { 
-		        type     : "POST"
-		    	    ,   url      : "${rootPath}/user/login"
-		    	    ,   dataType : "json" 
-		    	    ,   beforeSend: function(xhr) {
-		    	        xhr.setRequestHeader("Accept", "application/json");
-		    	        xhr.setRequestHeader("Content-Type", "application/json");
-		    	    }
-		    	    ,   data     : param
-		    	    ,   success : function(result){
-		    	    	alert(result.msg);
-		    	    	if(result.data=="S"){
-		    	    		location.href = "${rootPath}/user/main";
-		    	    	}else{
-		    	    		$("#id").val("");
-		    	    		$("#pwd").val("");
-		    	    	}
-		    	    }
-		    	    ,   error : function(xhr, status, e) {
-		    		    	alert("에러 : "+e);
-		    		},
-		    		done : function(e) {
-		    		}
-		    		};
-		$.ajax(a);
+		var paramIds = "userId,userPwd";
+		var au = new AjaxUtil("/user/login",paramIds);
+		au.setCallbackSuccess(test);
+		au.send();
 	});
 </script>
 </body>
