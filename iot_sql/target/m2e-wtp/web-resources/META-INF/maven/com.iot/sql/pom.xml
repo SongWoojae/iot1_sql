@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iot</groupId>
 	<artifactId>sql</artifactId>
-	<name>iot_sql</name>
+	<name>iot1_sql</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -38,7 +38,7 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>
+		</dependency>	
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -122,8 +122,6 @@
 			<scope>test</scope>
 		</dependency>        
 		
-		
-
 		<!-- mysql -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>

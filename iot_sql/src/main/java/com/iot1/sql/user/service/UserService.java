@@ -1,7 +1,8 @@
 package com.iot1.sql.user.service;
 
 
-import java.util.Map;
+import java.util.List;
+
 
 import com.iot1.sql.user.dto.UserInfo;
 
@@ -9,8 +10,14 @@ import com.iot1.sql.user.dto.UserInfo;
 
 public interface UserService {
 	public UserInfo login(UserInfo user);
-	
+
 	public UserInfo selectUser(UserInfo user);
+
+	public List<UserInfo> selectUserList(UserInfo user);
 	
-	public List<UserInfo> selectUserList
+	public int insertUser(UserInfo user);
+	
+	public int updatetUser(UserInfo user);
+	
+	public int deleteUser(UserInfo user);
 }
