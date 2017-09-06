@@ -24,8 +24,8 @@
 			<kendo:grid-column title="제품이름" field="giName" />
 			<kendo:grid-column title="제품설명" field="giDesc" />
 			<kendo:grid-column title="회사번호" field="viNum" />
-			<kendo:grid-column title="날짜" field=" giCredat"/>
-			<kendo:grid-column title="시간" field="giCretim" />
+			<kendo:grid-column title="생산일자" field=" giCredat"/>
+			<kendo:grid-column title="생산시간" field="giCretim" />
 		</kendo:grid-columns>
 		<kendo:dataSource pageSize="20" batch="true">
 			<kendo:dataSource-transport>
