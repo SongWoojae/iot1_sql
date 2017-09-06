@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDAO ud;
 	
+	
 	@Override
 	public UserInfo login(UserInfo user) {
 		UserInfo rUser = ud.selectUser(user);
@@ -32,13 +33,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<UserInfo> selectUserList(UserInfo user) {
 		// TODO Auto-generated method stub
-		return null;
+		return ud.selectUserList(user);
 	}
 
 	@Override
 	public int insertUser(UserInfo user) {
 		// TODO Auto-generated method stub
-		return 0;
+		return ud.insertUser(user);
 	}
 
 	@Override

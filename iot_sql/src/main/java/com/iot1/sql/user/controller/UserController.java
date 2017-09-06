@@ -42,4 +42,9 @@ public class UserController {
 	public @ResponseBody List<UserInfo> getUserList(HttpSession hs, UserInfo user, ModelMap hm){
 		return us.selectUserList(user);
 	}
+	
+	@RequestMapping(value="/user/insert", method=RequestMethod.POST)
+	public @ResponseBody int insert(HttpSession hs, @RequestBody UserInfo user, ModelMap hm){
+		return us.insertUser(user);
+	}
 }

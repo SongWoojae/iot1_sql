@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<title>Login</title>
+</head>
 <link rel="stylesheet" href="${rootPath}/resources/ui/signin.css" />
 <body>
 	<div class="container">
 		<form class="form-signin">
 			<h2 class="form-signin-heading">Please login</h2>
 			<label for="inputEmail" class="sr-only">ID</label> <input type="text"
-				id="id" name="id" class="form-control" placeholder="ID" required value="${userId}"
+				id="userId" name="id" class="form-control" placeholder="ID" required value="${userId}"
 				autofocus> <label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" name="pwd" id="pwd" class="form-control"
-				placeholder="Password" required>
+			<input type="password" name="pwd" id="userPwd" class="form-control"
+				placeholder="Password" required> 
 			<div class="checkbox">
 				<label> <input type="checkbox" value="1" id="saveId">
 					Remember me
@@ -23,11 +24,10 @@
 
 	</div>
 	<!-- /container -->
-	<script>
+<script>
 	$("#btn2").click(function(){
 		var paramIds = "userId,userPwd";
-		var au = new AjaxUtil("/user/login",paramIds);
-		//au.setCallbackSuccess(test);
+		var au = new AjaxUtil("/user/login",paramIds); 
 		au.send();
 	});
 </script>
