@@ -12,8 +12,6 @@
 
 	<kendo:grid title="그리드" name="grid" pageable="true" sortable="true" scrollable="true" height="450">
 		<kendo:grid-editable mode="inline" confirmation="Are you sure you want to remove this item?"/>
-        
-       
 	<kendo:grid-toolbar>
 		<kendo:grid-toolbarItem name="create" text="생성"/>
 		<kendo:grid-toolbarItem name="save" text="저장"/>
