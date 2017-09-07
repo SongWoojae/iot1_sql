@@ -25,5 +25,18 @@ public class GoodsServiceImpl implements GoodsService{
 		return gDao.selectGoodsInfoList(gi);
 	}
 
+	@Override
+	public List<GoodsInfo> saveGoodsInfoList(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return gDao.saveGodosInfoList(gi);
+	}
+
+
+
+	
+
+
+	
+
 	
 }

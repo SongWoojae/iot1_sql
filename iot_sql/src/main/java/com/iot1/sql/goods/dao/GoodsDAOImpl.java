@@ -22,5 +22,16 @@ public class GoodsDAOImpl extends SqlSessionDaoSupport implements GoodsDAO {
 		return this.getSqlSession().selectList("goods.SELECT_GOODS",gi);
 	}
 
+	@Override
+	public List<GoodsInfo> saveGodosInfoList(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+
+	
+
 	
 }

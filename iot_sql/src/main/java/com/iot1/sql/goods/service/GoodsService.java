@@ -10,5 +10,10 @@ public interface GoodsService {
 	
 	public List<GoodsInfo> getGoodsInfoList(GoodsInfo gi);
 	
+	public List<GoodsInfo> saveGoodsInfoList(GoodsInfo gi);
+	
+	
+	
+	
 
 }
