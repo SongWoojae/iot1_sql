@@ -19,6 +19,7 @@ public class GoodsServiceImpl implements GoodsService{
 		return gDao.selectGoodsInfo(gi);
 	}
 
+
 	@Override
 	public List<GoodsInfo> getGoodsInfoList(GoodsInfo gi) {
 		// TODO Auto-generated method stub
@@ -26,10 +27,34 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	@Override
-	public List<GoodsInfo> saveGoodsInfoList(GoodsInfo gi) {
+	public int insertGoodsInfo(GoodsInfo gi) {
 		// TODO Auto-generated method stub
-		return gDao.saveGodosInfoList(gi);
+		return gDao.insertGoodsInfo(gi);
 	}
+	
+	@Override
+	public int insertGoodsInfoList(GoodsInfo[] giList) {
+		int result = 0;
+		for(GoodsInfo gi : giList){
+			result += gDao.insertGoodsInfo(gi);
+		}
+		return result;
+	}
+
+	@Override
+	public int updateGoodsInfo(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return gDao.updateGoodsInfo(gi);
+	}
+
+	@Override
+	public int deleteGoodsInfo(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return gDao.deleteGoodsInfo(gi);
+	}
+
+	
+
 
 
 

@@ -23,14 +23,24 @@ public class GoodsDAOImpl extends SqlSessionDaoSupport implements GoodsDAO {
 	}
 
 	@Override
-	public List<GoodsInfo> saveGodosInfoList(GoodsInfo gi) {
+	public int insertGoodsInfo(GoodsInfo gi) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getSqlSession().insert("goods.INSERT_GOODS", gi);
+	}
+
+	@Override
+	public int updateGoodsInfo(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().update("goods.UPDATE_GOODS", gi);
+	}
+
+	@Override
+	public int deleteGoodsInfo(GoodsInfo gi) {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().delete("goods.DELETE_GOODS", gi);
 	}
 
 	
-
-
 	
 
 	

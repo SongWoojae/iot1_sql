@@ -22,5 +22,31 @@ public class VendorDAOImpl extends SqlSessionDaoSupport implements VendorDAO{
 		return this.getSqlSession().selectList("vendor.SELECT_VENDOR",vi);
 	}
 
+	@Override
+	public int insertVendorInfo(VendorInfo vi) {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().insert("vendor.INSERT_VENDOR", vi);
+	}
+
+	@Override
+	public int updateVendorInfo(VendorInfo vi) {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().update("vendor.UPDATE_VENDOR", vi);
+	}
+
+	@Override
+	public int deleteVendorInfo(VendorInfo vi) {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().delete("vendor.DELETE", vi);
+	}
+
+	@Override
+	public int comboVendorInfo(VendorInfo vi) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 	
 }
