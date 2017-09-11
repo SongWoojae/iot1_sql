@@ -4,8 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <c:url value="/vendor/list" var="readUrl" />
-<c:url value="/grid/api/update" var="updateUrl" />
-<c:url value="/grid/api/delete" var="deleteUrl" />
+<c:url value="/vendor/update" var="updateUrl" />
+<c:url value="/vendor/delete" var="deleteUrl" />
 <c:url value="/vendor/create" var="createUrl" />
 <br>
 <br>
@@ -15,7 +15,7 @@
 <br>
 	<kendo:grid title="그리드" name="grid" pageable="true" sortable="true"
 		scrollable="false" height="450">
-		<kendo:grid-editable mode="incell" />
+		<kendo:grid-editable mode="inline" />
 		<kendo:grid-pageable refresh="true" pageSizes="true" buttonCount="5">
 		</kendo:grid-pageable>
 		<kendo:grid-toolbar>
@@ -29,8 +29,14 @@
 			<kendo:grid-column title="회사설명" field="viDesc" />
 			<kendo:grid-column title="회사주소" field="viAddress" />
 			<kendo:grid-column title="회사전화번호" field="viPhone" />
-			<kendo:grid-column title="날짜" field=" viCredat"/>
+			<kendo:grid-column title="날짜" field=" viCredat" format="{0:yyyy-MM-dd}"/>
 			<kendo:grid-column title="시간" field="viCretim" />
+			<kendo:grid-column title="&nbsp;" width="250px">
+				<kendo:grid-column-command>
+            		<kendo:grid-column-commandItem name="edit" />
+            		<kendo:grid-column-commandItem name="destroy" />
+            	</kendo:grid-column-command>
+            	 </kendo:grid-column>
 		</kendo:grid-columns>
 		<kendo:dataSource pageSize="20" batch="true">
 			<kendo:dataSource-transport>
@@ -54,6 +60,7 @@
             <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model id="viNum">
                     <kendo:dataSource-schema-model-fields>
+                     <kendo:dataSource-schema-model-field name="viNum" type="number" editable="false"/>
                         <kendo:dataSource-schema-model-field name="viName" type="string">
                         	<kendo:dataSource-schema-model-field-validation required="true" />
                         </kendo:dataSource-schema-model-field>
@@ -66,9 +73,9 @@
                         <kendo:dataSource-schema-model-field name="viPhone" type="number">
                         	<kendo:dataSource-schema-model-field-validation required="true" />
                       	 </kendo:dataSource-schema-model-field>
-                      	  <kendo:dataSource-schema-model-field name="viCredat" type="number">
+                      	  <kendo:dataSource-schema-model-field name="viCredat" editable="true" type="date">
                       	 </kendo:dataSource-schema-model-field>
-                      	  <kendo:dataSource-schema-model-field name="viCretim" type="number">
+                      	  <kendo:dataSource-schema-model-field name="viCretim" editable="false">
                  
                       	 </kendo:dataSource-schema-model-field>
                     </kendo:dataSource-schema-model-fields>

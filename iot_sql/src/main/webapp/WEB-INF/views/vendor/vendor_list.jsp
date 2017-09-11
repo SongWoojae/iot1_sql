@@ -15,7 +15,7 @@
 <br>
 	<kendo:grid title="그리드" name="grid" pageable="true" sortable="true"
 		scrollable="false" height="450">
-		<kendo:grid-editable mode="inline" />
+		<kendo:grid-editable mode="inline" confirmation="Are you sure you want to remove this item?"/>
 		<kendo:grid-pageable refresh="true" pageSizes="true" buttonCount="5">
 		</kendo:grid-pageable>
 		<kendo:grid-toolbar>

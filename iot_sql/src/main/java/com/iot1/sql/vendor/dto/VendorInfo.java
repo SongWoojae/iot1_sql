@@ -5,15 +5,11 @@ public class VendorInfo {
 	private String viName;
 	private String viDesc;
 	private String viAddress;
-	public String getViAddress() {
-		return viAddress;
-	}
-	public void setViAddress(String viAddress) {
-		this.viAddress = viAddress;
-	}
 	private String viPhone;
 	private String viCredat;
 	private String viCretim;
+	
+	
 	public int getViNum() {
 		return viNum;
 	}
@@ -31,6 +27,12 @@ public class VendorInfo {
 	}
 	public void setViDesc(String viDesc) {
 		this.viDesc = viDesc;
+	}
+	public String getViAddress() {
+		return viAddress;
+	}
+	public void setViAddress(String viAddress) {
+		this.viAddress = viAddress;
 	}
 	public String getViPhone() {
 		return viPhone;
@@ -52,9 +54,10 @@ public class VendorInfo {
 	}
 	@Override
 	public String toString() {
-		return "VendorInfo [viNum=" + viNum + ", viName=" + viName + ", viDesc=" + viDesc + ", viPhone=" + viPhone
-				+ ", viCredat=" + viCredat + ", viCretim=" + viCretim + "]";
+		return "VendorInfo [viNum=" + viNum + ", viName=" + viName + ", viDesc=" + viDesc + ", viAddress=" + viAddress
+				+ ", viPhone=" + viPhone + ", viCredat=" + viCredat + ", viCretim=" + viCretim + "]";
 	}
+	
 	
 	
 

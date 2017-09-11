@@ -16,11 +16,6 @@ public class VendorDAOImpl extends SqlSessionDaoSupport implements VendorDAO{
 		return this.getSqlSession().selectOne("vendor.SELECT_VENDOR",vi);
 	}
 
-	@Override
-	public List<VendorInfo> selectVendorInfoList(VendorInfo vi) {
-		// TODO Auto-generated method stub
-		return this.getSqlSession().selectList("vendor.SELECT_VENDOR",vi);
-	}
 
 	@Override
 	public int insertVendorInfo(VendorInfo vi) {
@@ -37,14 +32,22 @@ public class VendorDAOImpl extends SqlSessionDaoSupport implements VendorDAO{
 	@Override
 	public int deleteVendorInfo(VendorInfo vi) {
 		// TODO Auto-generated method stub
-		return this.getSqlSession().delete("vendor.DELETE", vi);
+		return this.getSqlSession().delete("vendor.DELETE_VENDOR", vi);
 	}
 
 	@Override
-	public int comboVendorInfo(VendorInfo vi) {
+	public List<VendorInfo> selectVendorInfoList(VendorInfo vi) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getSqlSession().selectList("vendor.SELECT_VENDOR",vi);
 	}
+
+
+	@Override
+	public List<VendorInfo> selectVendorInfoCombo() {
+		// TODO Auto-generated method stub
+		return this.getSqlSession().selectList("vendor.SELECT_VENDOR_COMBO");
+	}
+
 
 
 

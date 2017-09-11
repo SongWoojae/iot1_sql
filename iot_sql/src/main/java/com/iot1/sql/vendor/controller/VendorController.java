@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class VendorController {
 	}
 	
 	@RequestMapping(value="/vendor/combo",method=RequestMethod.GET)
-	public String getVendorInfoCombo(Model model){
+	public String getVendorInfoCombo(Model model, HttpServletRequest request){
         List<VendorInfo> viList = vs.getVendorInfoCombo();
         
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
@@ -44,7 +46,11 @@ public class VendorController {
         }
         
         model.addAttribute("vendors", result);
-        return "goods/goods_list";
+        String url = request.getParameter("url");
+        if(url==null || url.equals("")){
+        	url = "goods/goods_list";
+        }
+        return url;
 	}
 	@RequestMapping(value="/vendor/create",method=RequestMethod.POST)
 	public @ResponseBody List<VendorInfo> insertVendorInfoList(@RequestBody VendorInfo[] vendorList, VendorInfo vi){

@@ -29,7 +29,7 @@ public class VendorServiceImpl implements VendorService {
 	@Override
 	public List<VendorInfo> getVendorInfoCombo() {
 		// TODO Auto-generated method stub
-		return vDao.comboVendorInfo(vi);
+		return vDao.selectVendorInfoCombo();
 	}
 
 	@Override

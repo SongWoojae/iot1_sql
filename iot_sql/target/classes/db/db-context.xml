@@ -19,7 +19,11 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="${sqlmap.location}" />
 	</bean>
-
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -27,21 +31,24 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	
+
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />
 		<property name="logFormatter">
-			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
-				<property name="loggingType" value="MULTI_LINE" />
-			</bean>
+			<ref bean="customForm"/>
 		</property>
 	</bean>
-	
+
+	<bean id="customForm" class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+		<property name="loggingType" value="MULTI_LINE"/>
+	</bean>
 	<aop:config proxy-target-class="true">
-		<aop:pointcut id="txAdvisePointCut" expression="execution(* com.iot.sp..service.*Service..*(..))"/>
-		<aop:advisor id="transactionAdvisor" pointcut-ref="txAdvisePointCut" advice-ref="txAdvice"/>
+		<aop:pointcut id="txAdvisePointCut"
+			expression="execution(* com.iot1sql.lecture..service.*Service.*(..))" />
+		<aop:advisor id="transactionAdvisor" pointcut-ref="txAdvisePointCut"
+			advice-ref="txAdvice" />
 	</aop:config>
-	
+
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" />
@@ -51,12 +58,13 @@
 			<tx:method name="*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
-	
-	<tx:annotation-driven proxy-target-class="true" transaction-manager="txManager"/>
+
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="txManager" />
 
 	<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 </beans>
