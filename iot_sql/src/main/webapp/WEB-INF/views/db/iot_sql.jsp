@@ -6,18 +6,46 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IOT SQL</title>
 </head>
 <script>
+var treeview;
 function onBound(){
-	
+	treeview = $('#treeview').data('kendoTreeView');
 }
-function toolbarEvent(){
-	
+
+function toolbarEvent(e){
+	if($("#btnConnect").text()=="접속해제"){
+		treeview.dataSource.read();
+		$("#btnConnect").text("접속");
+		return ;
+	}
+	var data = treeview.dataItem(window.selectedNode);
+	if(data && data.diNum){
+		//$('#treeview>.k-group>.k-item>.k-group').remove();
+		//treeview.dataSource.read();
+		var au = new AjaxUtil("db/connecte");
+		var param = {};
+		param["diNum"] = data.diNum;
+		au.param = JSON.stringify(param);
+		au.setCallbackSuccess(callbackForTreeItem);
+		au.send();
+	}else{
+		alert("접속하실 데이터베이스를 선택해주세요");
+	}
 }
-function treeSelect(){
-	
+
+function treeSelect(e){
+	window.selectedNode = e.node;
+	var data = treeview.dataItem(window.selectedNode);
+	if(data.database){
+		var au = new AjaxUtil("db/table/list");
+		var param = {};
+		param["database"] = data.database;
+		au.param = JSON.stringify(param);
+		au.setCallbackSuccess(callbackForTreeItem2);
+		au.send();
+	}
 }
 </script>
 <br><br><br>
