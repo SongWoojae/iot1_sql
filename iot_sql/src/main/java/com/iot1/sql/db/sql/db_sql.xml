@@ -7,10 +7,7 @@
 		select dinum, dbtitle, dburl, dbms, id, pwd, port
 		from db_info
 		where 1=1
-		<if test="diNum!=0">
-			and dinum = #{dinum}
-		</if>
-		order by dinum desc
+	
 		
 	</select>	
 	
@@ -23,12 +20,18 @@
 	
 	 </select>
 	
-	<select id="TABLE_INFO_SELECT" parameterType="Map"  resultType="Map">
-		select  column_name, data_type, character_maximum_length,is_nullable
+	<select id="TABLE_INFO_SELECT" parameterType="table"  resultType="column">
+		select  column_name as columnName, data_type as dataType, 
+		  character_maximum_length as characterMaximumLength,
+		  is_nullable as isNullable
 		 from INFORMATION_SCHEMA.columns 
-		where table_name=#{dbname}
+		where table_name=#{tableName}
 		and table_schema=database()
 		 order by ordinal_position;
+	</select>
+	
+	<select id="USE_DATABASE" parameterType="database">
+		use ${database}
 	</select>
 	
 

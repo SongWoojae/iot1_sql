@@ -5,14 +5,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.metadata.Table;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.iot1.sql.common.DataSourceFactory;
+import com.iot1.sql.db.dto.Column;
 import com.iot1.sql.db.dto.DataBase;
 import com.iot1.sql.db.dto.DbInfo;
+import com.iot1.sql.db.dto.Table;
 
 @Repository
 public class DbDAOImpl extends SqlSessionDaoSupport implements DbDAO {
@@ -54,6 +55,12 @@ public class DbDAOImpl extends SqlSessionDaoSupport implements DbDAO {
 	public List<Table> selectTableList(DataBase di) throws Exception {
 		// TODO Auto-generated method stub
 		return dsf.getSqlSession().selectList("db.TABLE_SELECT", di);
+	}
+
+	@Override
+	public List<Column> selectTableInfo(Table table) throws Exception {
+		// TODO Auto-generated method stub
+		return dsf.getSqlSession().selectList("db.TABLE_INFO_SELECT",table);
 	}
 	
 	
