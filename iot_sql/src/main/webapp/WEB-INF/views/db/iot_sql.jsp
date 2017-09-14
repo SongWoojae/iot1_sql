@@ -16,31 +16,52 @@ function onBound(){
 	treeview = $('#treeview').data('kendoTreeView');
 	$( "#query" ).keydown(function(e) {
 		var keyCode = e.keyCode || e.which;
-		if(e.ctrlKey && keyCode==120 && e.shiftKey){
-			var sql = this.value;
-			var cursor = this.selectionStart;
-			var startSql = sql.substr(0,cursor);
-			var startSap = startSql.lastIndexOf(";")
-			startSql = startSql.substr(startSap+1);
-			var endSql = sql.substr(cursor);
-			var endSap = endSql.indexOf(";");
-			if(endSap==-1) {
-				endSap=sql.length;
+		if(keyCode==120){
+			var sql;
+			var sqls;
+			if(e.ctrlKey && keyCode==120 && e.shiftKey){
+				sql = this.value;
+				var cursor = this.selectionStart;
+				var startSql = sql.substr(0,cursor);
+				var startSap = startSql.lastIndexOf(";")
+				startSql = startSql.substr(startSap+1);
+				var endSql = sql.substr(cursor);
+				var endSap = endSql.indexOf(";");
+				if(endSap==-1) {
+					endSap=sql.length;
+				}
+				endSql = endSql.substr(0,endSap);
+				sql = startSql + endSql;
+			}else if(e.ctrlKey && keyCode==120){
+				sql = this.value.substr(this.selectionStart, this.selectionEnd - this.selectionStart);
+			}else if(keyCode==120){
+				sql = this.value;
 			}
-			endSql = endSql.substr(0,endSap);
-			sql = startSql + endSql;
-			alert(sql);
-			alert(this.selectionStart);
-		}else if(e.ctrlKey && keyCode==120){
-			var t = this.value.substr(this.selectionStart, this.selectionEnd - this.selectionStart);
-			alert(t);
-		}else if(keyCode==120){
+			if(sql){
+				sql = sql.trim();
+				sqls = sql.split(";");
+				if(sqls.length==1){
+					var au = new AjaxUtil("db/run/sql");
+					var param = {};
+					param["sql"] = sql;
+					au.param = JSON.stringify(param);
+					au.setCallbackSuccess(callbackSql);
+					au.send();
+					return;
+				}else if(sqls){
+					
+					return;
+				}
+			}
 			
 		}
-		
 	});
 }
 
+function callbackSql(result){
+	var key = result.key;
+	var obj = result[key];
+}
 function treeSelect(){
 	window.selectedNode = treeview.select();
 	var data = treeview.dataItem(window.selectedNode);
@@ -66,7 +87,7 @@ function callbackForTreeItem2(result){
 		var table = result.tableList[i];
 		treeview.append({
 			tableName: table.tableName
-        }, treeview.select());
+        }, treeview.select()); //선택된 것 밑으로 차일드 트리 발생
 	}
 }
 
@@ -94,7 +115,7 @@ function toolbarEvent(e){
 		//$('#treeview>.k-group>.k-item>.k-group').remove();
 		//treeview.dataSource.read();
 		var au = new AjaxUtil("db/connect");
-		var param = {};
+		var param = {};	
 		param["diNum"] = data.diNum;
 		au.param = JSON.stringify(param);
 		au.setCallbackSuccess(callbackForTreeItem);
@@ -119,6 +140,8 @@ function toolbarEvent(e){
                                 </div>
 				            </kendo:splitter-pane-content>
 				        </kendo:splitter-pane>
+				        
+				        
 				        <kendo:splitter-pane id="center-pane" collapsible="false">
 				            <kendo:splitter-pane-content>
 								<kendo:splitter name="vertical1" orientation="vertical" style="height: 100%; width: 100%;">
@@ -141,6 +164,8 @@ function toolbarEvent(e){
 				</kendo:splitter>
             </kendo:splitter-pane-content>
         </kendo:splitter-pane>
+        
+        
         <kendo:splitter-pane id="middle-pane" collapsible="false" size="100px">
             <kendo:splitter-pane-content>
                 <div class="pane-content">
@@ -149,6 +174,8 @@ function toolbarEvent(e){
                 </div>
             </kendo:splitter-pane-content>
         </kendo:splitter-pane>
+        
+        
         <kendo:splitter-pane id="bottom-pane" collapsible="false" resizable="false" size="20px" scrollable="false">
             <kendo:splitter-pane-content>
 	                <b>MySql Tool For Web</b>

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 public class DataBase {
 	private String database;
 	private String tableName;
+	
+	
 	public String getDatabase() {
 		return database;
 	}

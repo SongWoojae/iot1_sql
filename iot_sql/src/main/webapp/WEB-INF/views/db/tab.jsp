@@ -43,13 +43,9 @@
 			</kendo:tabStrip-item-content>
 		</kendo:tabStrip-item>
 		<kendo:tabStrip-item text="쿼리">
-			<kendo:tabStrip-item-content>
-				<div class="weather">
-					<h2>
-						29<span>&ordm;C</span>
-					</h2>
-					<p>Sunny weather in New York.</p>
-				</div>
+			<kendo:tabStrip-item-content> 
+				<textarea id="query" style="width:100%; height:100%">
+				</textarea>
 			</kendo:tabStrip-item-content>
 		</kendo:tabStrip-item>
 	</kendo:tabStrip-items>
