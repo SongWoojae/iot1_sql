@@ -7,13 +7,17 @@
 		select dinum, dbtitle, dburl, dbms, id, pwd, port
 		from db_info
 		where 1=1
-	
+		
+		<if test="diNum!=0">
+			and dinum = #{diNum}
+		</if>
+		order by dinum desc
 		
 	</select>	
 	
 	<select id="TABLE_SELECT" parameterType="dataBase" resultType="table">
 		select table_name as tablename from information_schema.tables
-		where table_schema=#{database}
+		where table_schema= #{database}
 		<if test="tableName != null">
 			and table_name = #{table_name}
 		</if>

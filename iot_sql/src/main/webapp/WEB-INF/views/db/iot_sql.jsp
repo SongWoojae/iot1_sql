@@ -13,10 +13,21 @@
 var treeview;
 
 function onBound(){
+	if(!treeview){
 	treeview = $('#treeview').data('kendoTreeView');
+	}
+}
+
+function test(a){
+	alert(a);
+}
+$(document).ready(function(){
+	var cnt = 0;	
 	$( "#query" ).keydown(function(e) {
 		var keyCode = e.keyCode || e.which;
 		if(keyCode==120){
+			
+			kendoConsole.log("Selected: " + sql );
 			var sql;
 			var sqls;
 			if(e.ctrlKey && keyCode==120 && e.shiftKey){
@@ -32,6 +43,7 @@ function onBound(){
 				}
 				endSql = endSql.substr(0,endSap);
 				sql = startSql + endSql;
+		
 			}else if(e.ctrlKey && keyCode==120){
 				sql = this.value.substr(this.selectionStart, this.selectionEnd - this.selectionStart);
 			}else if(keyCode==120){
@@ -53,14 +65,32 @@ function onBound(){
 					return;
 				}
 			}
-			
 		}
 	});
-}
+})
+
 
 function callbackSql(result){
 	var key = result.key;
 	var obj = result[key];
+	var gridData = odj.list;
+	
+	try{
+		$('#resultGrid').kendoGrid('destroy').empty();
+		
+	}catch(e){
+		
+	}
+	var gridParam = {
+			dataSource: {
+				data: gridData,
+				pageSize: 5
+			},
+			editable: false,
+			sortable: true,
+			pageable: true
+	}
+	var grid = $("$resultGrid").kendoGrid(girdParam);
 }
 function treeSelect(){
 	window.selectedNode = treeview.select();
@@ -151,6 +181,8 @@ function toolbarEvent(e){
 						                		<c:import url="${tabJsp }"/>
 			                                </div>
 		       							</kendo:splitter-pane>
+		       							
+		       							
 		       							<kendo:splitter-pane id="middle-pane" collapsible="true" >
 							                <div class="pane-content">
 						                		<c:import url="${tableInfoJsp}"/>
@@ -169,9 +201,15 @@ function toolbarEvent(e){
         <kendo:splitter-pane id="middle-pane" collapsible="false" size="100px">
             <kendo:splitter-pane-content>
                 <div class="pane-content">
-	                <h3>Outer splitter / middle pane</h3>
+	                <h3><span style="color:red">Outer splitter</span> / <span style="color:blue">middle pane</span></h3>
 	                <p>Resizable only.</p>
+	                  <div class="console"></div>
                 </div>
+                  <style>
+            div.console div {
+                height: auto;
+            }
+        </style>
             </kendo:splitter-pane-content>
         </kendo:splitter-pane>
         
