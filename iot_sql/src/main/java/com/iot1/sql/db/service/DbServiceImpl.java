@@ -55,4 +55,10 @@ public class DbServiceImpl implements DbService{
 		return dDao.runSql(pm);
 	}
 
+	@Override
+	public Map<String, Object> runSqls(Map<String, List> pm) throws Exception {
+		// TODO Auto-generated method stub
+		return dDao.runSqls(pm);
+	}
+
 }

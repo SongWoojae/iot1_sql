@@ -19,11 +19,8 @@ function onBound(){
 	}
 	
 }
-function test(a){
-	alert(a);
-}
+
 $(document).ready(function(){
-	
 	var cnt = 0;
 	$( "#query" ).keydown(function(e) {
 		var keyCode = e.keyCode || e.which;
@@ -45,15 +42,18 @@ $(document).ready(function(){
 				}
 				endSql = endSql.substr(0,endSap);
 				sql = startSql + endSql;
-				kendoConsole.log(this.value);
+				kendoConsole.log(sql);
 			}else if(e.ctrlKey && keyCode==120){
 				sql = this.value.substr(this.selectionStart, this.selectionEnd - this.selectionStart);
+				kendoConsole.log(sql);
 			}else if(keyCode==120){
 				sql = this.value;
+				kendoConsole.log(sql);
 			}
 			if(sql){
 				sql = sql.trim();
 				sqls = sql.split(";");
+				sqls = sqls.filter(function (e) {return e});
 				if(sqls.length==1){
 					var au = new AjaxUtil("db/run/sql");
 					var param = {};
@@ -62,8 +62,13 @@ $(document).ready(function(){
 					au.setCallbackSuccess(callbackSql);
 					au.send();
 					return;
-				}else if(sqls){
-					
+				}else if(sqls.length>1){
+					var au = new AjaxUtil("db/run/sqls");
+					var param = {};
+					param["sql"] = sqls;
+					au.param = JSON.stringify(param);
+					au.setCallbackSuccess(callbackSql);
+					au.send();
 					return;
 				}
 			}
@@ -76,6 +81,7 @@ function callbackSql(result){
 	var obj = result[key];
 	var gridData = obj.list;
 	var sql = obj.sql;
+	var sqls = obj.sqls;
 	
 	
 	try{
@@ -199,7 +205,7 @@ function changeMiddlePane(e){
         </kendo:splitter-pane>
         <kendo:splitter-pane id="middle-pane" collapsible="false" size="100px">
             <kendo:splitter-pane-content>
-                <div class="pane-content">
+                <div class="pane-content" style="overflow:scroll;">
 	                <div class="console"></div>
                 </div>
             </kendo:splitter-pane-content>
