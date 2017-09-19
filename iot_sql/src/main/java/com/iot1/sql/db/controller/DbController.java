@@ -64,7 +64,7 @@ public class DbController {
 	@RequestMapping(value="/db/run/sql",method=RequestMethod.POST)
 	public @ResponseBody ModelMap getSqlResult(@RequestBody Map<String,String> pm, ModelMap map){
 		try{
-			map.put("result", ds.runSql(pm));
+			map.put("resultMap", ds.runSql(pm));
 			map.put("key", "resultMap");
 		}catch(Exception e){
 			map.put("error", e.getMessage());
