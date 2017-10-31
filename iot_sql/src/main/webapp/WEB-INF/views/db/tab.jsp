@@ -37,6 +37,8 @@
 				</div>
 			</kendo:tabStrip-item-content>
 		</kendo:tabStrip-item>
+		
+		
 	</kendo:tabStrip-items>
 </kendo:tabStrip>
 <style>

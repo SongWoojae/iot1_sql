@@ -29,7 +29,7 @@ $(document).ready(function(){
 </script>
 <body>
 
-<input type="button" value="유저리스트 이동" data-url="${rPath}/user/list">
+<input type="button" value="유저리스트 이동" data-url="${rPath}/user:list">
 
 </body>
 </html>
